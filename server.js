@@ -19,6 +19,8 @@ let db = fs.readFileSync(__dirname + '/db/db.json', 'utf8', (err)=> {
 db = JSON.parse(db);
 
 
+
+
 app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "./public/index.html"));
   });
@@ -49,23 +51,23 @@ app.get("/", function(req, res) {
 
   })
   
-  app.delete("/api/notes/:id", function(req, res) {
-    var chosen = req.params.id;
+  app.delete("/api/notes/:id", async function(req, res) {
+    var chosen = parseInt(req.params.id);
   
     console.log(chosen);
   
-    for (var i = 0; i < db.length; i++) {
-      if (chosen == db[i].id) {
-        db.splice(db[i], 1);      
+    for  (var i = 0; i < db.length; i++) {
+      if (chosen === db[i].id) {
+        db.splice(i, 1);      
       }
 
 
 
-      for (let i = 0; i <db.length; i++){
+      for   (let i = 0; i <db.length; i++){
         db[i].id = 1 + i;
       }
     }
-    fs.writeFile("./db/db.json", JSON.stringify(db), 'utf8', err =>{
+    await fs.writeFile("./db/db.json", JSON.stringify(db), 'utf8', err =>{
       if (err){
         throw err;
       }
