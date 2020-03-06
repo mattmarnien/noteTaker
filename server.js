@@ -4,7 +4,7 @@ var fs = require('fs');
 
 var app = express();
 var PORT = process.env.PORT || 3000;
-let nextId = 0;
+let nextId = 1;
 
 app.use(express.static(__dirname));
 app.use(express.urlencoded({ extended: true }));
@@ -29,7 +29,7 @@ app.get("/", function(req, res) {
   
 
   app.get("/api/notes", function(req, res) {
-    nextId = db.length;
+    nextId = db.length + 1;
     return res.json(db);
    
     });
@@ -62,7 +62,7 @@ app.get("/", function(req, res) {
 
 
       for (let i = 0; i <db.length; i++){
-        db[i].id = 0 + i;
+        db[i].id = 1 + i;
       }
     }
     fs.writeFile("./db/db.json", JSON.stringify(db), 'utf8', err =>{
