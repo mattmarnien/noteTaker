@@ -64,8 +64,12 @@ app.get("/", function(req, res) {
         db[i].id = 0 + i;
       }
     }
+    fs.writeFile("./db/db.json", JSON.stringify(db), 'utf8', err =>{
+      if (err){
+        throw err;
+      }
   
-    return res.json(false);
+    
   });
 
   
