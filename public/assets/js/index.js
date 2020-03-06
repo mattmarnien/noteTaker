@@ -61,6 +61,7 @@ var handleNoteSave = function() {
     getAndRenderNotes();
     renderActiveNote();
   });
+  getAndRenderNotes();
 
 };
 
@@ -72,6 +73,7 @@ var handleNoteDelete = function(event) {
   var note = $(this)
     .parent(".list-group-item")
     .data();
+    console.log(note.id)
 
   if (activeNote.id === note.id) {
     activeNote = {};
@@ -82,13 +84,14 @@ var handleNoteDelete = function(event) {
     renderActiveNote();
     console.log(note.id);
   });
+
 };
 
 // Sets the activeNote and displays it
 var handleNoteView = function() {
   activeNote = $(this).data();
   renderActiveNote();
-  renderNoteList();
+ 
 };
 
 // Sets the activeNote to and empty object and allows the user to enter a new note

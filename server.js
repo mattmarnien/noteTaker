@@ -56,10 +56,11 @@ app.get("/", function(req, res) {
   
     for (var i = 0; i < db.length; i++) {
       if (chosen == db[i].id) {
-        db.splice(db[i], 1);
-      
-      
+        db.splice(db[i], 1);      
       }
+
+
+
       for (let i = 0; i <db.length; i++){
         db[i].id = 0 + i;
       }
@@ -69,7 +70,7 @@ app.get("/", function(req, res) {
         throw err;
       }
     })
-  
+    return res.json(false);
     
   });
 
