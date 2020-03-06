@@ -30,6 +30,7 @@ var deleteNote = function(id) {
     url: "api/notes/" + id,
     method: "DELETE"
   });
+
 };
 
 // If there is an activeNote, display it, otherwise render empty inputs
@@ -53,13 +54,14 @@ var renderActiveNote = function() {
 var handleNoteSave = function() {
   var newNote = {
     title: $noteTitle.val(),
-    text: $noteText.val()
+    text: $noteText.val(),
   };
 
   saveNote(newNote).then(function(data) {
     getAndRenderNotes();
     renderActiveNote();
   });
+
 };
 
 // Delete the clicked note
@@ -78,6 +80,7 @@ var handleNoteDelete = function(event) {
   deleteNote(note.id).then(function() {
     getAndRenderNotes();
     renderActiveNote();
+    console.log(note.id);
   });
 };
 
@@ -108,6 +111,7 @@ var renderNoteList = function(notes) {
   $noteList.empty();
 
   var noteListItems = [];
+  
 
   for (var i = 0; i < notes.length; i++) {
     var note = notes[i];
@@ -120,6 +124,7 @@ var renderNoteList = function(notes) {
 
     $li.append($span, $delBtn);
     noteListItems.push($li);
+   
   }
 
   $noteList.append(noteListItems);
